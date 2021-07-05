@@ -10,12 +10,12 @@ jobs:
     working_directory: ~/repo
 
     environment:
+      ALLURE_TESTPLAN_PATH: ./testplan.json
       ALLURE_RESULTS: allure-results
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
     steps:
       - checkout
       - run: |
           wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_386 -O ./allurectl
           chmod +x ./allurectl
+      - run: ./allurectl job-run plan --output-file ${ALLURE_TESTPLAN_PATH}
       - run: ./allurectl watch -- ./gradlew test
