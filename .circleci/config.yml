@@ -22,8 +22,10 @@ jobs:
       ALLURE_TESTPLAN_PATH: ./testplan.json
       ALLURE_RESULTS: allure-results
       BROWSER: << pipeline.parameters.BROWSER >>
+      ALLURE_LAUNCH_TAGS: "regular, circle"
     steps:
       - checkout
+      - run: printenv
       - run: |
           wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_386 -O ./allurectl
           chmod +x ./allurectl
